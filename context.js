@@ -29,7 +29,7 @@ spotLight.position.set(-450,130,130);
 scene.add(spotLight);
 //Light Helper
 var spotLightHelper = new THREE.SpotLightHelper( spotLight );
-//scene.add( spotLightHelper );
+scene.add( spotLightHelper );
 
 //Meshes
 
@@ -41,7 +41,7 @@ var worldTexture = [
 	THREE.ImageUtils.loadTexture( 'texture/cube_map/skybox/py.jpg' ),
 	THREE.ImageUtils.loadTexture( 'texture/cube_map/skybox/pz.jpg' ),
 	THREE.ImageUtils.loadTexture( 'texture/cube_map/skybox/px.jpg' )
-]
+];
 //Define Materials for each Face
 var worldMaterials = [
     new THREE.MeshBasicMaterial({
@@ -76,22 +76,22 @@ groundTexture.wrapT = THREE.RepeatWrapping;
 groundTexture.repeat.set( 2, 1 );
 var groundMaterials = [
 	new THREE.MeshBasicMaterial({
-		map: groundTexture,
+		map: groundTexture
 	}),
 	new THREE.MeshBasicMaterial({
-		map: groundTexture,
+		map: groundTexture
 	}),
 	new THREE.MeshPhongMaterial({
-		map: groundTextureNoRepeat,
+		map: groundTextureNoRepeat
 	}),
 	new THREE.MeshBasicMaterial({
-		map: groundTextureNoRepeat,
+		map: groundTextureNoRepeat
 	}),
 	new THREE.MeshBasicMaterial({
-		map: groundTexture,
+		map: groundTexture
 	}),
 	new THREE.MeshBasicMaterial({
-		map: groundTexture,
+		map: groundTexture
 	})
 ];
 var ground = new THREE.Mesh(groundGeometry, new THREE.MeshFaceMaterial(groundMaterials));
@@ -116,10 +116,11 @@ water = new THREE.Water( renderer, camera, scene, {
 
 //Geyser Geometry
 var geyserGeometry = new THREE.CircleGeometry(50, 50);//parametro
-var geyserMaterial = new THREE.MeshStandardMaterial({
-	color: 0x3399ff,
+/*var geyserMaterial = new THREE.MeshStandardMaterial({
+	color: 0x3399ff
 });
-//var geyser = new THREE.Mesh(geyserGeometry, geyserMaterial);
+var geyser = new THREE.Mesh(geyserGeometry, geyserMaterial);
+*/
 var geyser = new THREE.Mesh(geyserGeometry, water.material);
 geyser.rotation.x = -Math.PI/2;
 geyser.position.y = 15.1;
