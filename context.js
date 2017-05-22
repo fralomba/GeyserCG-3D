@@ -29,7 +29,7 @@ spotLight.position.set(-450,130,130);
 scene.add(spotLight);
 //Light Helper
 var spotLightHelper = new THREE.SpotLightHelper( spotLight );
-//scene.add( spotLightHelper );
+scene.add( spotLightHelper );
 
 //Meshes
 
