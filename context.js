@@ -97,6 +97,11 @@ var groundMaterials = [
 var ground = new THREE.Mesh(groundGeometry, new THREE.MeshFaceMaterial(groundMaterials));
 ground.position.set(0,-235,0);
 
+var sphereGeo = new THREE.SphereGeometry(50);
+var sphereMat = new THREE.MeshLambertMaterial();
+var sphere = new THREE.Mesh(sphereGeo, sphereMat);
+ground.add(sphere);
+
 
 //WATER!!!!!
 
