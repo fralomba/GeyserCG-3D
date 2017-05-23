@@ -120,7 +120,7 @@ water = new THREE.Water( renderer, camera, scene, {
 } );
 
 //Geyser Geometry
-var geyserGeometry = new THREE.CircleGeometry(50, 50);//parametro
+var geyserGeometry = new THREE.CircleGeometry(75, 50);//parametro
 /*var geyserMaterial = new THREE.MeshStandardMaterial({
 	color: 0x3399ff
 });
