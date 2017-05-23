@@ -1,4 +1,4 @@
-//CIAICIAICAICAIC
+var keyboard = {};
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 1, 10000);
@@ -97,12 +97,6 @@ var groundMaterials = [
 var ground = new THREE.Mesh(groundGeometry, new THREE.MeshFaceMaterial(groundMaterials));
 ground.position.set(0,-235,0);
 
-var sphereGeo = new THREE.SphereGeometry(50);
-var sphereMat = new THREE.MeshLambertMaterial();
-var sphere = new THREE.Mesh(sphereGeo, sphereMat);
-ground.add(sphere);
-
-
 //WATER!!!!!
 
 waterNormals = new THREE.TextureLoader().load( 'texture/water/water_normals.jpg' );
@@ -120,7 +114,7 @@ water = new THREE.Water( renderer, camera, scene, {
 } );
 
 //Geyser Geometry
-var geyserGeometry = new THREE.CircleGeometry(75, 50);//parametro
+var geyserGeometry = new THREE.CircleGeometry(52, 50);//parametro
 /*var geyserMaterial = new THREE.MeshStandardMaterial({
 	color: 0x3399ff
 });
@@ -134,4 +128,9 @@ geyser.add(water);
 ground.add(geyser);
 scene.add(ground);
 scene.add(world);
+
+document.onkeydown = function(ev){
+
+	keyboard[ev.keyCode] = true;
+};
 

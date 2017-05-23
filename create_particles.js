@@ -45,7 +45,9 @@ function create_particles(n, sigma){
 	}
 }
 
-create_particles(25, 812);
+//1px del raggio equivale a +0.5 n e +12.5 sigma
+
+create_particles(11, 525);
 
 var particlesMaterial = new THREE.PointsMaterial( { color: 0xffffff, size:5 } );
 

@@ -5,14 +5,24 @@ function render() {
     requestAnimationFrame(render);
     water.material.uniforms.time.value += 1.0 / 60.0;
     water.render();
-
-    if(sphere.position.y < 500){
-        sphere.position.x += 0.8*Math.cos(Math.PI*0.3);
-        sphere.position.y += 0.7*Math.sin(Math.PI*0.3);
-    }
-    else{
-        sphere.position.y = 0;
-    }
+	
+	if(keyboard[32]){
+		if(particlesField.position.y < 500){
+			particlesField.position.y += 30;
+		}else{
+			console.log('yeha');
+			ground.remove(particlesField);
+			keyboard[32] = false;
+			create_particles(11, 525);
+			var particlesMaterial = new THREE.PointsMaterial( { color: 0xffffff, size:5 } );
+			
+			var particlesFieldNew = new THREE.Points( particlesGeometry, particlesMaterial );
+			
+			particlesField = particlesFieldNew;
+			
+			ground.add(particlesField);
+		}
+	}   
 }
 
 render();
