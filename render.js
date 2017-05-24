@@ -1,10 +1,9 @@
-orbitControls = new THREE.OrbitControls(camera);
-var t = 0;
-x0 = particlesField.position.x;
-y0 = particlesField.position.y;
-var vx = 5;
-var vy = 5;
-var sec = 0;
+orbitControls = new THREE.OrbitControls(camera); 
+
+var uniforms = [];
+var reset = false;
+
+var explosions = 0;
 
 function render() {	
 		
@@ -13,31 +12,40 @@ function render() {
     water.material.uniforms.time.value += 1.0 / 60.0;
     water.render();
 	
-	
 	if(keyboard[32]){
 		
-		t++
-		particlesField.position.x = vx*t;
-		particlesField.position.y = vy*t-(0.5*(t*t)); 
 		
 		
+		if(explosions == 25){
+			for(var i=0; i<uniforms.length; i++){
+			
+				ground.remove(uniforms[i]);
+						
+			}
+			explosions = 0;
+		}
 		
-		/*if(particlesField.position.y < 500){
-			particlesField.position.y += 30;
-		}else{
-			console.log('yeha');
-			ground.remove(particlesField);
+		
+		if(!reset){
+			uniforms[explosions] = create_particles(11, 525);
+			explosions++;
+			console.log('yeah');
+		}
+		
+		if(explosions == 25){
+			
 			keyboard[32] = false;
-			create_particles(11, 525);
-			var particlesMaterial = new THREE.PointsMaterial( { color: 0xffffff, size:5 } );
-			
-			var particlesFieldNew = new THREE.Points( particlesGeometry, particlesMaterial );
-			
-			particlesField = particlesFieldNew;
-			
-			ground.add(particlesField);
-		}*/
-	}   
+		}
+		
+	}  
+	
+	for(var i=0; i<uniforms.length; i++){
+		
+		uniforms[i].material.uniforms.t.value += 0.4;
+		
+	}
+	
+	
 }
 
 render();

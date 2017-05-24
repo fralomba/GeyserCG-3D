@@ -4,11 +4,13 @@ function random_range(a,b){
 	
 }
 
-var particlesGeometry = new THREE.Geometry();
 
 function create_particles(n, sigma){
 	
 	var A = 5;
+	var vertices = new Float32Array(n*100*3);
+	var movements = new Float32Array(n*100*3);
+	var particleGeometry = new THREE.BufferGeometry();
 	
 	for(var i=0; i<n; i++){
 		
@@ -32,27 +34,43 @@ function create_particles(n, sigma){
 
             x = rp*Math.cos(theta);
             z = rp*Math.sin(theta);
+             
+            vertices[i*300 + j*3] = x;
+            vertices[i*300 + j*3 + 1] = 0;
+            vertices[i*300 + j*3 + 2] = z;
             
-            var particle = new THREE.Vector3();
-            
-			particle.x = x;
-			particle.z = z;
-			particle.y = 30;
-		
-			particlesGeometry.vertices.push( particle )
+            movements[i*300 + j*3] = random_range(1,5);
+            movements[i*300 + j*3 + 1] = theta;
+            movements[i*300 + j*3 + 2] = random_range(30,70);
 			
 		}	
 	}
+	
+	
+	particleGeometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
+	particleGeometry.addAttribute('movements', new THREE.BufferAttribute(movements, 3));
+	
+	
+	var uniforms = {
+		t: {value: 0.0},
+	};
+	particleMaterial = new THREE.ShaderMaterial({  
+		uniforms: uniforms,
+		vertexShader: document.getElementById('vertex_particles').textContent,
+		fragmentShader: document.getElementById('fragment_particles').textContent
+	});
+	var particleMesh = new THREE.Points( particleGeometry, particleMaterial );
+	ground.add(particleMesh);
+	
+	return particleMesh;
+	
 }
 
 //1px del raggio equivale a +0.5 n e +12.5 sigma
 
-create_particles(11, 525);
+//var uniforms = create_particles(11, 525);
 
-var particlesMaterial = new THREE.PointsMaterial( { color: 0xffffff, size:5 } );
 
-var particlesField = new THREE.Points( particlesGeometry, particlesMaterial );
 
-ground.add(particlesField);
 
 

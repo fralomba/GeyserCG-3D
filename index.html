@@ -12,6 +12,57 @@
 		</style>
 	</head>
 	<body>
+		<script type="x-shader/x-vertex" id="vertex_particles">
+			
+			varying vec3 vUv;
+			attribute vec3 movements;
+
+			uniform float t;
+			
+			
+			void main()
+			{	
+				
+				float theta = movements.y;
+				
+				float v0x = movements.x*cos(theta);
+				float v0y = movements.z;
+				float v0z = movements.x*sin(theta);
+				
+				vec3 p = position;				
+				
+				p.x += v0x*t;
+				p.y += -0.5*3.0*t*t+v0y*t;
+				p.z += v0z*t;
+				
+				
+				if(p.y < -1.0){
+					p.x = -0.1;
+					p.y = -0.1;
+					p.z = -0.1;
+				} 
+				
+				vec4 mvPosition = modelViewMatrix * vec4( p, 1.0 );
+				gl_PointSize = 15.0 * ( 300.0 / -mvPosition.z );
+				gl_Position = projectionMatrix * mvPosition;
+
+				vUv = p;
+			}
+			
+		</script>
+		
+		<script type="x-shader/x-fragment" id="fragment_particles">
+			
+			varying vec3 vUv;
+			
+			void main()
+			{
+				
+				gl_FragColor = vec4(1.0,1.0,1.0,1.0);
+			}
+			
+		</script>
+		
 		<script src="three.js"></script>
 		<script src="water.js"></script>
 		<script src="orbit_controls.js"></script>
