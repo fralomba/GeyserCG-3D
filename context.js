@@ -52,6 +52,8 @@ var worldMaterials = [
         map: worldTexture[1] }),
     new THREE.MeshBasicMaterial({
 	    side: THREE.BackSide,
+        transparent: true,
+        opacity: 0,
         map: worldTexture[2] }),
     new THREE.MeshBasicMaterial({
 	    side: THREE.BackSide,
@@ -130,7 +132,6 @@ scene.add(ground);
 scene.add(world);
 
 document.onkeydown = function(ev){
-
 	keyboard[ev.keyCode] = true;
 };
 
