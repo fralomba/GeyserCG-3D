@@ -6,15 +6,19 @@ $(function() {
 
 
     var explosions = 0;
-    var numExp;
+    var numExp = 25;
 
-    var guiControls = new function () {         // creo dei nuovi controlli
+    var guiControls = new function () { // creo dei nuovi controlli
         this.exp = 25;
     };
 
     var datGui = new dat.GUI();//associo i controlli creati sopra a un oggetto dat.GUI
 
-    datGui.add(guiControls, 'exp', 10, 100);
+    datGui.add(guiControls, 'exp', 25, 100).onFinishChange(function(){
+	    numExp = Math.round(guiControls.exp);
+	    explosions = numExp;
+	    keyboard[32] = false;
+    });
 
     function render() {
 
@@ -22,20 +26,15 @@ $(function() {
         requestAnimationFrame(render);
         water.material.uniforms.time.value += 1.0 / 60.0;
         water.render();
-
+		
         if(keyboard[32]){
-
-        	numExp = Math.round(guiControls.exp);
-
-            if(explosions == numExp){
+			
+            if(explosions >= numExp){
 
                 for(var i=0; i<uniforms.length; i++){
                     ground.remove(uniforms[i]);
                 }
                 explosions = 0;
-                numExp = Math.round(guiControls.exp);
-
-
             }
 
             if(!reset){
@@ -47,7 +46,7 @@ $(function() {
                 explosions++;
             }
 
-            if(explosions == numExp){
+            if(explosions >= numExp){
                 keyboard[32] = false;
             }
         }

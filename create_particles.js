@@ -40,7 +40,7 @@ function create_particles(n, sigma){
             vertices[i*300 + j*3 + 1] = 0;
             vertices[i*300 + j*3 + 2] = z;
             
-            movements[i*300 + j*3] = random_range(2,7);
+            movements[i*300 + j*3] = random_range(0,7);
             movements[i*300 + j*3 + 1] = theta;
             movements[i*300 + j*3 + 2] = random_range(25,75);
 			
