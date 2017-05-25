@@ -4,7 +4,7 @@ function random_range(a,b){
 	
 }
 
-var texture_water_drop = THREE.ImageUtils.loadTexture('texture/water_drop.png');
+var texture_water_drop = THREE.ImageUtils.loadTexture('texture/gocce4.jpeg');
 
 function create_particles(n, sigma){
 	
@@ -40,9 +40,9 @@ function create_particles(n, sigma){
             vertices[i*300 + j*3 + 1] = 0;
             vertices[i*300 + j*3 + 2] = z;
             
-            movements[i*300 + j*3] = random_range(5,10);
+            movements[i*300 + j*3] = random_range(2,7);
             movements[i*300 + j*3 + 1] = theta;
-            movements[i*300 + j*3 + 2] = random_range(50,100);
+            movements[i*300 + j*3 + 2] = random_range(25,75);
 			
 		}	
 	}
