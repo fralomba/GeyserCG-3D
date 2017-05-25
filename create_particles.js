@@ -4,6 +4,7 @@ function random_range(a,b){
 	
 }
 
+var texture_water_drop = THREE.ImageUtils.loadTexture('texture/water_drop.png');
 
 function create_particles(n, sigma){
 	
@@ -39,9 +40,9 @@ function create_particles(n, sigma){
             vertices[i*300 + j*3 + 1] = 0;
             vertices[i*300 + j*3 + 2] = z;
             
-            movements[i*300 + j*3] = random_range(1,5);
+            movements[i*300 + j*3] = random_range(5,10);
             movements[i*300 + j*3 + 1] = theta;
-            movements[i*300 + j*3 + 2] = random_range(30,70);
+            movements[i*300 + j*3 + 2] = random_range(50,100);
 			
 		}	
 	}
@@ -53,20 +54,24 @@ function create_particles(n, sigma){
 	
 	var uniforms = {
 		t: {value: 0.0},
+		texture_sampler: {type: 't', value: texture_water_drop},
 	};
+	
 	particleMaterial = new THREE.ShaderMaterial({  
 		uniforms: uniforms,
 		vertexShader: document.getElementById('vertex_particles').textContent,
-		fragmentShader: document.getElementById('fragment_particles').textContent
-	});
-	var particleMesh = new THREE.Points( particleGeometry, particleMaterial );
-	ground.add(particleMesh);
+		fragmentShader: document.getElementById('fragment_particles').textContent,
+		blending: THREE.AdditiveBlending,
+		transparent: true,
+	}); 
+	var particlePoints = new THREE.Points( particleGeometry, particleMaterial );
+	ground.add(particlePoints);
 	
-	return particleMesh;
+	return particlePoints;
 	
 }
-
-//1px del raggio equivale a +0.5 n e +12.5 sigma
+ 
+//1px del raggio equivale a +0.5 n e +12.5 sigma (50 = 10 e 500)
 
 //var uniforms = create_particles(11, 525);
 

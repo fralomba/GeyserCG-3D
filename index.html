@@ -4,8 +4,6 @@
 		<meta charset=utf-8>
 		<title>Elaborato Computer Graphics and 3D</title>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 		<style>
 			body { margin: 0; }
 			canvas { width: 100%; height: 100% }
@@ -14,19 +12,20 @@
 	<body>
 		<script type="x-shader/x-vertex" id="vertex_particles">
 			
-			varying vec3 vUv;
 			attribute vec3 movements;
 
+			varying vec3 vUv;
 			uniform float t;
-			
-			
+			uniform sampler2D texture_sampler;
+	
 			void main()
 			{	
 				
 				float theta = movements.y;
+				float v0r = movements.x;
+				float v0y = movements.z;
 				
 				float v0x = movements.x*cos(theta);
-				float v0y = movements.z;
 				float v0z = movements.x*sin(theta);
 				
 				vec3 p = position;				
@@ -34,7 +33,6 @@
 				p.x += v0x*t;
 				p.y += -0.5*3.0*t*t+v0y*t;
 				p.z += v0z*t;
-				
 				
 				if(p.y < -1.0){
 					p.x = -0.1;
@@ -45,20 +43,22 @@
 				vec4 mvPosition = modelViewMatrix * vec4( p, 1.0 );
 				gl_PointSize = 15.0 * ( 300.0 / -mvPosition.z );
 				gl_Position = projectionMatrix * mvPosition;
+				
+				vUv = position ;
 
-				vUv = p;
 			}
 			
 		</script>
 		
 		<script type="x-shader/x-fragment" id="fragment_particles">
 			
-			varying vec3 vUv;
+			uniform sampler2D texture_sampler;
 			
 			void main()
-			{
+			{	
+				gl_FragColor = texture2D(texture_sampler, gl_PointCoord);
+				gl_FragColor.a = 0.8;
 				
-				gl_FragColor = vec4(1.0,1.0,1.0,1.0);
 			}
 			
 		</script>

@@ -27,9 +27,12 @@ function render() {
 		
 		
 		if(!reset){
-			uniforms[explosions] = create_particles(11, 525);
+			var n = (geyserRadius-50)*1.5 + 10;
+			var sigma = (geyserRadius-50)*12.5 + 500;
+			console.log(n + " " + sigma);
+			uniforms[explosions] = create_particles(n, sigma);
+			uniforms[explosions].geometry.attributes.position.needsUpdate = true;
 			explosions++;
-			console.log('yeah');
 		}
 		
 		if(explosions == 25){
