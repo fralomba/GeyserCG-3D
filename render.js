@@ -52,7 +52,7 @@ $(function() {
         renderer.render(scene, camera);
         requestAnimationFrame(render);
         water.material.uniforms.time.value += 1.0 / 60.0;
-        water.render();
+        water.render();        
 		
         if(keyboard[32]){
 

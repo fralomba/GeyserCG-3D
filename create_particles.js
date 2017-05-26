@@ -29,23 +29,29 @@ function create_particles(n, sigma){
 			var r = Math.sqrt(-2*(sigma^2)*Math.log(zp/A));
 		}
 		
-		//Create particles
-		for(var j=0; j<100; j++){
-			var theta = random_range(0,2*Math.PI);
-            rp = random_range(r,R);
-
-            x = rp*Math.cos(theta);
-            z = rp*Math.sin(theta);
-             
-            vertices[i*300 + j*3] = x;
-            vertices[i*300 + j*3 + 1] = 0;
-            vertices[i*300 + j*3 + 2] = z;
-            
-            movements[i*300 + j*3] = random_range(0,7);
-            movements[i*300 + j*3 + 1] = theta;
-            movements[i*300 + j*3 + 2] = random_range(25,75);
+		if( i==0 ){
 			
-		}	
+		}else{
+			for(var j=0; j<100; j++){
+				var theta = random_range(0,2*Math.PI);
+	            rp = random_range(r,R);
+	
+	            x = rp*Math.cos(theta);
+	            z = rp*Math.sin(theta);
+	             
+	            vertices[i*300 + j*3] = x;
+	            vertices[i*300 + j*3 + 1] = 0;
+	            vertices[i*300 + j*3 + 2] = z;
+	            
+	            movements[i*300 + j*3] = random_range(0,7);
+	            movements[i*300 + j*3 + 1] = theta;
+	            movements[i*300 + j*3 + 2] = random_range(25,75);
+				
+			}
+		}
+		
+		//Create particles
+			
 	}
 	
 	
