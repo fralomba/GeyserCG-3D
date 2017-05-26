@@ -9,22 +9,23 @@ $(function() {
     var numExp = 25;
 
     var guiControls = new function () { // creo dei nuovi controlli
-        this.exp = 25;
-        this.geyserRad = 50;
+        this.Explosion = 25;
+        this.Radius = 50;
+        this.DropDimension = 5;
     };
 
     var datGui = new dat.GUI();//associo i controlli creati sopra a un oggetto dat.GUI
 
-    datGui.add(guiControls, 'exp', 20, 100).onFinishChange(function(){
-	    numExp = Math.round(guiControls.exp);
+    datGui.add(guiControls, 'Explosion', 20, 100).onFinishChange(function(){
+	    numExp = Math.round(guiControls.Explosion);
 	    explosions = numExp;
 	    keyboard[32] = false;
     });
 
-    datGui.add(guiControls,'geyserRad', 50, 200).onFinishChange(function () {
+    datGui.add(guiControls,'Radius', 40, 200).onFinishChange(function () {
         ground.remove(geyser);
         ground.remove(circleBlue);
-        geyserRadius = Math.round(guiControls.geyserRad);
+        geyserRadius = Math.round(guiControls.Radius);
 
         geyserGeometry = new THREE.CircleGeometry(geyserRadius, 50);
         geyser = new THREE.Mesh(geyserGeometry, water.material);
@@ -40,6 +41,10 @@ $(function() {
         geyser.add(water);
         ground.add(geyser);
         ground.add(circleBlue);
+    });
+
+    datGui.add(guiControls, 'DropDimension', 3, 20).onFinishChange(function(){
+        dropDim = guiControls.DropDimension;
     });
 
     function render() {

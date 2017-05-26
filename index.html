@@ -20,6 +20,7 @@
 
 			varying vec3 vUv;
 			uniform float t;
+			uniform float pointDim;
 			uniform sampler2D texture_sampler;
 	
 			void main()
@@ -45,7 +46,7 @@
 				} 
 				
 				vec4 mvPosition = modelViewMatrix * vec4( p, 1.0 );
-				gl_PointSize = 10.0 * ( 300.0 / -mvPosition.z );
+				gl_PointSize = pointDim * ( 300.0 / -mvPosition.z );
 				gl_Position = projectionMatrix * mvPosition;
 				
 				vUv = position ;

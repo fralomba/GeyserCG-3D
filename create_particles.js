@@ -50,11 +50,11 @@ function create_particles(n, sigma){
 	
 	particleGeometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
 	particleGeometry.addAttribute('movements', new THREE.BufferAttribute(movements, 3));
-	
-	
-	var uniforms = {
+
+    var uniforms = {
 		t: {value: 0.0},
 		texture_sampler: {type: 't', value: texture_water_drop},
+		pointDim: {value: dropDim}
 	};
 	
 	particleMaterial = new THREE.ShaderMaterial({  
