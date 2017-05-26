@@ -33,8 +33,13 @@ $(function() {
 
         geyser.rotation.x = -Math.PI/2;
         geyser.position.y = 15.2;
+
+        circleBlue.rotation.x = -Math.PI/2;
+        circleBlue.position.y = 15.1;
+
         geyser.add(water);
         ground.add(geyser);
+        ground.add(circleBlue);
     });
 
     function render() {
