@@ -5,6 +5,7 @@ function random_range(a,b){
 }
 
 var texture_water_drop = THREE.ImageUtils.loadTexture('texture/gocce4.jpeg');
+var dropDim = 5;
 
 function create_particles(n, sigma){
 	
