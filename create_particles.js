@@ -73,7 +73,6 @@ function create_particles(n, sigma){
  
 //1px del raggio equivale a +0.5 n e +12.5 sigma (50 = 10 e 500)
 
-//var uniforms = create_particles(11, 525);
 
 
 

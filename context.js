@@ -126,7 +126,7 @@ geyser.add(water);
 var circleBlueGeometry = new THREE.CircleGeometry(geyserRadius, 50);
 var circleMaterial = new THREE.MeshBasicMaterial({
 	color:0x3399ff
-})
+});
 var circleBlue = new THREE.Mesh(circleBlueGeometry, circleMaterial);
 circleBlue.position.y = 15.1;
 circleBlue.rotation.x = -Math.PI/2;
