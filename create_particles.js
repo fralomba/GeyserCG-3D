@@ -4,17 +4,20 @@ function random_range(a,b){
 	
 }
 
-var texture_water_drop = THREE.ImageUtils.loadTexture('texture/gocce4.jpeg');
-var dropDim = 5;
+var texture_water_drop = new THREE.TextureLoader().load('texture/water_drop.png');
+var dropDim = 8;
+var opacity = 1.0;
 
 function create_particles(n, sigma){
 	
+	
+	var jMax = 100;
 	var A = 5;
-	var vertices = new Float32Array(n*100*3);
-	var movements = new Float32Array(n*100*3);
+	var vertices = new Float32Array(n*jMax*3);
+	var movements = new Float32Array(n*jMax*3);
 	var particleGeometry = new THREE.BufferGeometry();
 	
-	for(var i=0; i<n; i++){
+	for(var i=0; i<=n; i++){
 		
 		var z = (A/n)*(n-i);
 		
@@ -29,10 +32,10 @@ function create_particles(n, sigma){
 			var r = Math.sqrt(-2*(sigma^2)*Math.log(zp/A));
 		}
 		
-		if( i==0 ){
+		if(i == 0){
 			
-		}else{
-			for(var j=0; j<100; j++){
+		} else {
+			for(var j=0; j<jMax; j++){
 				var theta = random_range(0,2*Math.PI);
 	            rp = random_range(r,R);
 	
@@ -48,12 +51,11 @@ function create_particles(n, sigma){
 	            movements[i*300 + j*3 + 2] = random_range(25,75);
 				
 			}
-		}
 		
+		}
 		//Create particles
 			
 	}
-	
 	
 	particleGeometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
 	particleGeometry.addAttribute('movements', new THREE.BufferAttribute(movements, 3));
@@ -61,15 +63,18 @@ function create_particles(n, sigma){
     var uniforms = {
 		t: {value: 0.0},
 		texture_sampler: {type: 't', value: texture_water_drop},
-		pointDim: {value: dropDim}
+		pointDim: {value: dropDim},
+		opacity: {value: opacity},
 	};
 	
 	particleMaterial = new THREE.ShaderMaterial({  
 		uniforms: uniforms,
 		vertexShader: document.getElementById('vertex_particles').textContent,
 		fragmentShader: document.getElementById('fragment_particles').textContent,
-		blending: THREE.AdditiveBlending,
+		blending: THREE.NormalBlending,
 		transparent: true,
+		
+		
 	}); 
 	var particlePoints = new THREE.Points( particleGeometry, particleMaterial );
 	ground.add(particlePoints);

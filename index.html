@@ -18,7 +18,6 @@
 			
 			attribute vec3 movements;
 
-			varying vec3 vUv;
 			uniform float t;
 			uniform float pointDim;
 			uniform sampler2D texture_sampler;
@@ -48,8 +47,6 @@
 				vec4 mvPosition = modelViewMatrix * vec4( p, 1.0 );
 				gl_PointSize = pointDim * ( 300.0 / -mvPosition.z );
 				gl_Position = projectionMatrix * mvPosition;
-				
-				vUv = position ;
 
 			}
 			
@@ -58,13 +55,17 @@
 		<script type="x-shader/x-fragment" id="fragment_particles">
 			
 			uniform sampler2D texture_sampler;
+			uniform float opacity;
+			
 			
 			void main()
 			{	
 				gl_FragColor = texture2D(texture_sampler, gl_PointCoord);
-				gl_FragColor.a = 0.99;
 				
-			}
+				if(gl_FragColor.a > 0.3){
+					gl_FragColor.a = opacity;
+				} 
+			}		
 			
 		</script>
 		

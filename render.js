@@ -11,7 +11,8 @@ $(function() {
     var guiControls = new function () { // creo dei nuovi controlli
         this.Explosion = 25;
         this.Radius = 50;
-        this.DropDimension = 5;
+        this.DropDimension = 8;
+        this.Opacity = 1.0;
     };
 
     var datGui = new dat.GUI();//associo i controlli creati sopra a un oggetto dat.GUI
@@ -22,7 +23,7 @@ $(function() {
 	    keyboard[32] = false;
     });
 
-    datGui.add(guiControls,'Radius', 40, 200).onFinishChange(function () {
+    datGui.add(guiControls,'Radius', 50, 200).onFinishChange(function () {
         ground.remove(geyser);
         ground.remove(circleBlue);
         geyserRadius = Math.round(guiControls.Radius);
@@ -45,6 +46,10 @@ $(function() {
 
     datGui.add(guiControls, 'DropDimension', 3, 20).onFinishChange(function(){
         dropDim = guiControls.DropDimension;
+    });
+    
+    datGui.add(guiControls, 'Opacity', 0, 1).onFinishChange(function(){
+        opacity = guiControls.Opacity;
     });
 
     function render() {
@@ -78,10 +83,20 @@ $(function() {
                 keyboard[32] = false;
             }
         }
-
+        
         for(var i=0; i<uniforms.length; i++){
-            uniforms[i].material.uniforms.t.value += 0.4;
+	        
+	        if(uniforms[i].material.uniforms.t.value > 50){
+		        
+		        ground.remove(uniforms[i]);
+		        uniforms.splice(i, 1);
+	        } else {
+		        console.log('gpu');
+		    	uniforms[i].material.uniforms.t.value += 0.4;    
+	        }
+            
         }
+        
     }
 
     render();

@@ -4,8 +4,8 @@ var geyserRadius = 50;
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 1, 10000);
 var renderer = new THREE.WebGLRenderer({antialias: true});
-//renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
+//renderer.setSize(600, 600);
 camera.position.z = 1500;
 
 document.body.appendChild( renderer.domElement );
@@ -36,12 +36,12 @@ var spotLightHelper = new THREE.SpotLightHelper( spotLight );
 
 //Loading World Textures
 var worldTexture = [
-	THREE.ImageUtils.loadTexture( 'texture/cube_map/skybox/nx.jpg' ),
-	THREE.ImageUtils.loadTexture( 'texture/cube_map/skybox/nz.jpg' ),
-	THREE.ImageUtils.loadTexture( 'texture/cube_map/skybox/ny.jpg' ),
-	THREE.ImageUtils.loadTexture( 'texture/cube_map/skybox/py.jpg' ),
-	THREE.ImageUtils.loadTexture( 'texture/cube_map/skybox/pz.jpg' ),
-	THREE.ImageUtils.loadTexture( 'texture/cube_map/skybox/px.jpg' )
+	new THREE.TextureLoader().load( 'texture/cube_map/skybox/nx.jpg' ),
+	new THREE.TextureLoader().load( 'texture/cube_map/skybox/nz.jpg' ),
+	new THREE.TextureLoader().load( 'texture/cube_map/skybox/ny.jpg' ),
+	new THREE.TextureLoader().load( 'texture/cube_map/skybox/py.jpg' ),
+	new THREE.TextureLoader().load( 'texture/cube_map/skybox/pz.jpg' ),
+	new THREE.TextureLoader().load( 'texture/cube_map/skybox/px.jpg' )
 ];
 //Define Materials for each Face
 var worldMaterials = [
