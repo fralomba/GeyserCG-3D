@@ -6,8 +6,11 @@ function random_range(a,b){
 
 var texture_water_drop = new THREE.TextureLoader().load('texture/water_drop.png');
 var texture_steam_drop = new THREE.TextureLoader().load('texture/gocce3.jpeg');
-var dropDim = 8;
-var opacity = 1.0;
+var waterDropDim = 8.0;
+var steamDropDim = 8.0;
+var waterOpacity = 1.0;
+var steamOpacity = 1.0;
+
 
 function create_particles_water(n, sigma){
 	
@@ -42,14 +45,14 @@ function create_particles_water(n, sigma){
 	            x = rp*Math.cos(theta);
 	            z = rp*Math.sin(theta);
 	             
-	            vertices[i*300 + j*3] = x;
-	            vertices[i*300 + j*3 + 1] = 0;
-	            vertices[i*300 + j*3 + 2] = z;
+	            vertices[i*jMax*3 + j*3] = x;
+	            vertices[i*jMax*3 + j*3 + 1] = 0;
+	            vertices[i*jMax*3 + j*3 + 2] = z;
 	            
-	            movements[i*300 + j*3] = random_range(0,7);
-	            movements[i*300 + j*3 + 1] = theta;
-	            movements[i*300 + j*3 + 2] = random_range(25,75);
-				
+	            movements[i*jMax*3 + j*3] = random_range(0,7);
+	            movements[i*jMax*3 + j*3 + 1] = theta;
+	            movements[i*jMax*3 + j*3 + 2] = random_range(25,75);
+
 			}
 		
 		}
@@ -61,10 +64,9 @@ function create_particles_water(n, sigma){
 
     var uniforms = {
 		t: {value: 0.0},
-		pointDim: {value: dropDim},
+		pointDim: {value: waterDropDim},
 		texture_sampler: {type: 't', value: texture_water_drop},
-		
-		opacity: {value: opacity},
+		opacity: {value: waterOpacity},
 	};
 	
 	particleMaterial = new THREE.ShaderMaterial({  
@@ -73,9 +75,8 @@ function create_particles_water(n, sigma){
 		fragmentShader: document.getElementById('fragment_particles').textContent,
 		blending: THREE.AdditiveBlending,
 		transparent: true,
-		
-		
-	}); 
+	});
+
 	var particlePoints = new THREE.Points( particleGeometry, particleMaterial );
 	ground.add(particlePoints);
 	
@@ -111,18 +112,18 @@ function create_particles_steam(n, sigma){
 		} else {
 			for(var j=0; j<jMax; j++){
 				var theta = random_range(0,2*Math.PI);
-	            rp = random_range(r,R);
+	            var rp = random_range(r,R);
 	
-	            x = rp*Math.cos(theta);
-	            z = rp*Math.sin(theta);
+	            var x = rp*Math.cos(theta);
+	            var z = rp*Math.sin(theta);
 	             
-	            vertices[i*300 + j*3] = x;
-	            vertices[i*300 + j*3 + 1] = 0;
-	            vertices[i*300 + j*3 + 2] = z;
+	            vertices[i*jMax*3 + j*3] = x;
+	            vertices[i*jMax*3 + j*3 + 1] = 0;
+	            vertices[i*jMax*3 + j*3 + 2] = z;
 	            
-	            movements[i*300 + j*3] = random_range(-Math.PI,Math.PI);
-	            movements[i*300 + j*3 + 1] = random_range(0,6);
-	            movements[i*300 + j*3 + 2] = random_range(1,40);
+	            movements[i*jMax*3 + j*3] = random_range(-Math.PI,Math.PI);
+	            movements[i*jMax*3 + j*3 + 1] = random_range(0,6);
+	            movements[i*jMax*3 + j*3 + 2] = random_range(1,40);
 				
 			}
 		
@@ -136,8 +137,10 @@ function create_particles_steam(n, sigma){
     var uniforms = {
 		t: {value: 0.0},
 		texture_sampler: {type: 't', value: texture_steam_drop},
-		opacity: {value: opacity},
-	};
+		opacity: {value: steamOpacity},
+        pointDim: {value: steamDropDim},
+
+    };
 	
 	particleMaterial = new THREE.ShaderMaterial({  
 		uniforms: uniforms,
@@ -145,8 +148,6 @@ function create_particles_steam(n, sigma){
 		fragmentShader: document.getElementById('fragment_particles').textContent,
 		blending: THREE.AdditiveBlending,
 		transparent: true,
-		
-		
 	}); 
 	var particlePoints = new THREE.Points( particleGeometry, particleMaterial );
 	ground.add(particlePoints);

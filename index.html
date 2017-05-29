@@ -56,6 +56,7 @@
 			
 			attribute vec3 movements;
 
+			uniform float pointDim;
 			uniform float t;
 			uniform sampler2D texture_sampler;
 	
@@ -72,14 +73,8 @@
 				p.y += (v0y*t);
 				p.z += v0r*t*sin(omega);
 				
-				if(p.y < -1.0){
-					p.x = -0.1;
-					p.y = -0.1;
-					p.z = -0.1;
-				} 
-				
 				vec4 mvPosition = modelViewMatrix * vec4( p, 1.0 );
-				gl_PointSize = 20.0 * ( 300.0 / -mvPosition.z );
+				gl_PointSize = pointDim * ( 300.0 / -mvPosition.z );
 				gl_Position = projectionMatrix * mvPosition;
 
 			}

@@ -12,19 +12,25 @@ $(function() {
     var guiControls = new function () { // creo dei nuovi controlli
         this.Explosion = 25;
         this.Radius = 50;
-        this.Drop_Dimension = 8;
-        this.Opacity = 1.0;
+        this.DropDimension = 8.0;
+        this.WaterOpacity = 1.0;
+        this.SteamDimension = 8.0
+        this.SteamOpacity = 1.0;
     };
 
     var datGui = new dat.GUI();//associo i controlli creati sopra a un oggetto dat.GUI
 
-    datGui.add(guiControls, 'Explosion', 20, 100).onFinishChange(function(){
+    var generalFolder = datGui.addFolder('Generals');
+    var waterFolder = datGui.addFolder('Waterdrops');
+    var steamFolder = datGui.addFolder('Steamdrops');
+
+    generalFolder.add(guiControls, 'Explosion', 20, 100).onFinishChange(function(){
 	    numExp = Math.round(guiControls.Explosion);
 	    explosions = numExp;
 	    keyboard[32] = false;
     });
 
-    datGui.add(guiControls,'Radius', 50, 200).onFinishChange(function () {
+    generalFolder.add(guiControls,'Radius', 50, 200).onFinishChange(function () {
         ground.remove(geyser);
         ground.remove(circleBlue);
         geyserRadius = Math.round(guiControls.Radius);
@@ -45,12 +51,20 @@ $(function() {
         ground.add(circleBlue);
     });
 
-    datGui.add(guiControls, 'Drop_Dimension', 3, 20).onFinishChange(function(){
-        dropDim = guiControls.DropDimension;
+    waterFolder.add(guiControls, 'DropDimension', 3, 20).onFinishChange(function(){
+        waterDropDim = guiControls.DropDimension;
     });
-    
-    datGui.add(guiControls, 'Opacity', 0, 1).onFinishChange(function(){
-        opacity = guiControls.Opacity;
+
+    waterFolder.add(guiControls, 'WaterOpacity', 0, 1).onFinishChange(function(){
+        waterOpacity = waterFolder.WaterOpacity;
+    });
+
+    steamFolder.add(guiControls, 'SteamDimension', 3, 20).onFinishChange(function(){
+        steamDropDim = guiControls.SteamDimension;
+    });
+
+    steamFolder.add(guiControls, 'SteamOpacity', 0, 1).onFinishChange(function(){
+        steamOpacity = waterFolder.SteamOpacity;
     });
 
     function render() {
@@ -66,6 +80,8 @@ $(function() {
 
                 for(var i=0; i<water_drops.length; i++){
                     ground.remove(water_drops[i]);
+                }
+                for(var i=0; i<steam_drops.length; i++){
                     ground.remove(steam_drops[i]);
                 }
                 explosions = 0;
