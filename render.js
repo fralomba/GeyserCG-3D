@@ -1,7 +1,8 @@
 $(function() {
     orbitControls = new THREE.OrbitControls(camera);
 
-    var uniforms = [];
+    var water_drops = [];
+    var steam_drops = [];
     var reset = false;
 
 
@@ -11,7 +12,7 @@ $(function() {
     var guiControls = new function () { // creo dei nuovi controlli
         this.Explosion = 25;
         this.Radius = 50;
-        this.DropDimension = 8;
+        this.Drop_Dimension = 8;
         this.Opacity = 1.0;
     };
 
@@ -44,7 +45,7 @@ $(function() {
         ground.add(circleBlue);
     });
 
-    datGui.add(guiControls, 'DropDimension', 3, 20).onFinishChange(function(){
+    datGui.add(guiControls, 'Drop_Dimension', 3, 20).onFinishChange(function(){
         dropDim = guiControls.DropDimension;
     });
     
@@ -63,8 +64,9 @@ $(function() {
 
             if(explosions >= numExp){
 
-                for(var i=0; i<uniforms.length; i++){
-                    ground.remove(uniforms[i]);
+                for(var i=0; i<water_drops.length; i++){
+                    ground.remove(water_drops[i]);
+                    ground.remove(steam_drops[i]);
                 }
                 explosions = 0;
             }
@@ -73,9 +75,9 @@ $(function() {
                 var n = (geyserRadius-50)*1.5 + 10;
                 var sigma = (geyserRadius-50)*12.5 + 500;
 
-                uniforms[explosions] = create_particles(n, sigma);
-                uniforms[explosions].geometry.attributes.position.needsUpdate = true;
-
+                water_drops[explosions] = create_particles_water(n, sigma);
+                steam_drops[explosions] = create_particles_steam(n, sigma);
+                
                 explosions++;
             }
 
@@ -84,17 +86,34 @@ $(function() {
             }
         }
         
-        for(var i=0; i<uniforms.length; i++){
+        for(var i=0; i<water_drops.length; i++){
 	        
-	        if(uniforms[i].material.uniforms.t.value > 50){
+	        if(water_drops[i].material.uniforms.t.value > 50){
 		        
-		        ground.remove(uniforms[i]);
-		        uniforms.splice(i, 1);
+		        ground.remove(water_drops[i]);
+		        
+		        water_drops.splice(i, 1);
+		       
 	        } else {
 		        console.log('gpu');
-		    	uniforms[i].material.uniforms.t.value += 0.4;    
+		    	water_drops[i].material.uniforms.t.value += 0.4;
+		    	 
 	        }
             
+        }
+        
+        for(var i=0; i<steam_drops.length; i++){
+	        
+	        if(steam_drops[i].material.uniforms.t.value > 60 ){
+		        
+		        ground.remove(steam_drops[i]);
+		        steam_drops.splice(i, 1);
+		        
+	        }else{
+		        
+		        steam_drops[i].material.uniforms.t.value += 0.4;    
+		        
+	        }
         }
         
     }

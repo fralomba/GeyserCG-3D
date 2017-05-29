@@ -14,7 +14,7 @@
 
 	</head>
 	<body>
-		<script type="x-shader/x-vertex" id="vertex_particles">
+		<script type="x-shader/x-vertex" id="vertex_water_particles">
 			
 			attribute vec3 movements;
 
@@ -29,8 +29,8 @@
 				float v0r = movements.x;
 				float v0y = movements.z;
 				
-				float v0x = movements.x*cos(theta);
-				float v0z = movements.x*sin(theta);
+				float v0x = v0r*cos(theta);
+				float v0z = v0r*sin(theta);
 				
 				vec3 p = position;				
 				
@@ -46,6 +46,40 @@
 				
 				vec4 mvPosition = modelViewMatrix * vec4( p, 1.0 );
 				gl_PointSize = pointDim * ( 300.0 / -mvPosition.z );
+				gl_Position = projectionMatrix * mvPosition;
+
+			}
+			
+		</script>
+		
+		<script type="x-shader/x-vertex" id="vertex_steam_particles">
+			
+			attribute vec3 movements;
+
+			uniform float t;
+			uniform sampler2D texture_sampler;
+	
+			void main()
+			{	
+				
+				float omega = movements.x;
+				float v0r = movements.y;
+				float v0y = movements.z;
+				
+				vec3 p = position;				
+				
+				p.x += v0r*t*cos(omega);
+				p.y += (v0y*t);
+				p.z += v0r*t*sin(omega);
+				
+				if(p.y < -1.0){
+					p.x = -0.1;
+					p.y = -0.1;
+					p.z = -0.1;
+				} 
+				
+				vec4 mvPosition = modelViewMatrix * vec4( p, 1.0 );
+				gl_PointSize = 20.0 * ( 300.0 / -mvPosition.z );
 				gl_Position = projectionMatrix * mvPosition;
 
 			}
