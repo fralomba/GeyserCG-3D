@@ -9,8 +9,7 @@
 			canvas { width: 100%; height: 100% }
 		</style>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src= "dat.gui.min.js"></script>
+		<script src="jquery.min.js"></script>
 
 	</head>
 	<body>
@@ -20,6 +19,7 @@
 
 			uniform float t;
 			uniform float pointDim;
+			uniform float limitXZ;
 			uniform sampler2D texture_sampler;
 	
 			void main()
@@ -38,7 +38,7 @@
 				p.y += -0.5*3.0*t*t+v0y*t;
 				p.z += v0z*t;
 				
-				if(p.y < -1.0){
+				if(p.y < -1.0 || abs(p.x) > limitXZ || abs(p.z) > limitXZ){
 					p.x = -0.1;
 					p.y = -0.1;
 					p.z = -0.1;
@@ -58,6 +58,7 @@
 
 			uniform float pointDim;
 			uniform float t;
+			uniform float limitXZ;
 			uniform sampler2D texture_sampler;
 	
 			void main()
@@ -72,6 +73,12 @@
 				p.x += v0r*t*cos(omega);
 				p.y += (v0y*t);
 				p.z += v0r*t*sin(omega);
+				
+				if(abs(p.x) > limitXZ || abs(p.z) > limitXZ){
+					p.x = -0.1;
+					p.y = -0.1;
+					p.z = -0.1;
+				} 
 				
 				vec4 mvPosition = modelViewMatrix * vec4( p, 1.0 );
 				gl_PointSize = pointDim * ( 300.0 / -mvPosition.z );
@@ -102,6 +109,7 @@
 		<script src="water.js"></script>
 		<script src="orbit_controls.js"></script>
 		<script src="context.js"></script>
+		<script src= "dat.gui.min.js"></script>
 		<script src="create_particles.js"></script>
 		<script src="render.js"></script>
 	</body>

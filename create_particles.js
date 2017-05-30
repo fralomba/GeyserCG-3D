@@ -5,20 +5,33 @@ function random_range(a,b){
 }
 
 var texture_water_drop = new THREE.TextureLoader().load('texture/water_drop.png');
-var texture_steam_drop = new THREE.TextureLoader().load('texture/gocce3.jpeg');
+var texture_steam_drop = new THREE.TextureLoader().load('texture/water_drop.png');
 var waterDropDim = 8.0;
 var steamDropDim = 8.0;
 var waterOpacity = 1.0;
 var steamOpacity = 1.0;
+var v0y_water = 60;
+var v0y_steam = 20;
 
 
 function create_particles_water(n, sigma){
 	
-	var jMax = 70;
+	console.log(steamOpacity);
+	
+	var jMax_water = 70;
+	var jMax_steam = 30;
 	var A = 5;
-	var vertices = new Float32Array(n*jMax*3);
-	var movements = new Float32Array(n*jMax*3);
-	var particleGeometry = new THREE.BufferGeometry();
+	var vertices_water = new Float32Array(n*jMax_water*3);
+	var movements_water = new Float32Array(n*jMax_water*3);
+	var vertices_steam = new Float32Array(n*jMax_steam*3);
+	var movements_steam = new Float32Array(n*jMax_steam*3);
+	var theta;
+	var rp;
+	var x;
+	var z;
+	
+	var particleGeometry_water = new THREE.BufferGeometry();
+	var particleGeometry_steam = new THREE.BufferGeometry();
 	
 	for(var i=0; i<=n; i++){
 		
@@ -38,124 +51,91 @@ function create_particles_water(n, sigma){
 		if(i == 0){
 			
 		} else {
-			for(var j=0; j<jMax; j++){
-				var theta = random_range(0,2*Math.PI);
+			for(var j=0; j<jMax_water; j++){
+				theta = random_range(0,2*Math.PI);
 	            rp = random_range(r,R);
 	
 	            x = rp*Math.cos(theta);
 	            z = rp*Math.sin(theta);
 	             
-	            vertices[i*jMax*3 + j*3] = x;
-	            vertices[i*jMax*3 + j*3 + 1] = 0;
-	            vertices[i*jMax*3 + j*3 + 2] = z;
+	            vertices_water[i*jMax_water*3 + j*3] = x;
+	            vertices_water[i*jMax_water*3 + j*3 + 1] = 0;
+	            vertices_water[i*jMax_water*3 + j*3 + 2] = z;
 	            
-	            movements[i*jMax*3 + j*3] = random_range(0,7);
-	            movements[i*jMax*3 + j*3 + 1] = theta;
-	            movements[i*jMax*3 + j*3 + 2] = random_range(25,75);
+	            movements_water[i*jMax_water*3 + j*3] = random_range(0,7);
+	            movements_water[i*jMax_water*3 + j*3 + 1] = theta;
+	            movements_water[i*jMax_water*3 + j*3 + 2] = random_range(25,v0y_water);
 
 			}
+			
+			for(var j=0; j<jMax_steam; j++){
+				theta = random_range(0,2*Math.PI);
+	            rp = random_range(r,R);
+	
+	            x = rp*Math.cos(theta);
+	            z = rp*Math.sin(theta);
+	             
+	            vertices_steam[i*jMax_steam*3 + j*3] = x;
+	            vertices_steam[i*jMax_steam*3 + j*3 + 1] = 0;
+	            vertices_steam[i*jMax_steam*3 + j*3 + 2] = z;
+	            
+	            movements_steam[i*jMax_steam*3 + j*3] = random_range(-Math.PI,Math.PI);
+	            movements_steam[i*jMax_steam*3 + j*3 + 1] = random_range(0,6);
+	            movements_steam[i*jMax_steam*3 + j*3 + 2] = random_range(1,v0y_steam);
+				
+			}
+			
 		
 		}
 			
 	}
 	
-	particleGeometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
-	particleGeometry.addAttribute('movements', new THREE.BufferAttribute(movements, 3));
+	particleGeometry_water.addAttribute('position', new THREE.BufferAttribute(vertices_water, 3));
+	particleGeometry_water.addAttribute('movements', new THREE.BufferAttribute(movements_water, 3));
+	
+	particleGeometry_steam.addAttribute('position', new THREE.BufferAttribute(vertices_steam, 3));
+	particleGeometry_steam.addAttribute('movements', new THREE.BufferAttribute(movements_steam, 3));
 
-    var uniforms = {
+    var uniforms_water = {
 		t: {value: 0.0},
-		pointDim: {value: waterDropDim},
 		texture_sampler: {type: 't', value: texture_water_drop},
+		pointDim: {value: waterDropDim},
 		opacity: {value: waterOpacity},
+		limitXZ: {value: cubeSize/2},
 	};
 	
-	particleMaterial = new THREE.ShaderMaterial({  
-		uniforms: uniforms,
+	var uniforms_steam = {
+		t: {value: 0.0},
+		texture_sampler: {type: 't', value: texture_steam_drop},
+		opacity: {value: steamOpacity},
+        pointDim: {value: steamDropDim},
+        limitXZ: {value: cubeSize/2},
+    };
+	
+	particleMaterial_water = new THREE.ShaderMaterial({  
+		uniforms: uniforms_water,
 		vertexShader: document.getElementById('vertex_water_particles').textContent,
 		fragmentShader: document.getElementById('fragment_particles').textContent,
 		blending: THREE.AdditiveBlending,
 		transparent: true,
 	});
-
-	var particlePoints = new THREE.Points( particleGeometry, particleMaterial );
-	ground.add(particlePoints);
 	
-	return particlePoints;
-	
-}
-
-function create_particles_steam(n, sigma){
-	
-	var jMax = 30;
-	var A = 5;
-	var vertices = new Float32Array(n*jMax*3);
-	var movements = new Float32Array(n*jMax*3);
-	var particleGeometry = new THREE.BufferGeometry();
-	
-	for(var i=0; i<=n; i++){
-		
-		var z = (A/n)*(n-i);
-		
-		//External radius
-		var R = Math.sqrt(-2*(sigma^2)*Math.log(z/A));
-		
-		//Internal Radius
-		if(i==0){
-			r = 0;
-		}else{
-			var zp = (A/n)*(n-i+1);
-			var r = Math.sqrt(-2*(sigma^2)*Math.log(zp/A));
-		}
-		
-		if(i == 0){
-			
-		} else {
-			for(var j=0; j<jMax; j++){
-				var theta = random_range(0,2*Math.PI);
-	            var rp = random_range(r,R);
-	
-	            var x = rp*Math.cos(theta);
-	            var z = rp*Math.sin(theta);
-	             
-	            vertices[i*jMax*3 + j*3] = x;
-	            vertices[i*jMax*3 + j*3 + 1] = 0;
-	            vertices[i*jMax*3 + j*3 + 2] = z;
-	            
-	            movements[i*jMax*3 + j*3] = random_range(-Math.PI,Math.PI);
-	            movements[i*jMax*3 + j*3 + 1] = random_range(0,6);
-	            movements[i*jMax*3 + j*3 + 2] = random_range(1,40);
-				
-			}
-		
-		}
-			
-	}
-	
-	particleGeometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
-	particleGeometry.addAttribute('movements', new THREE.BufferAttribute(movements, 3));
-
-    var uniforms = {
-		t: {value: 0.0},
-		texture_sampler: {type: 't', value: texture_steam_drop},
-		opacity: {value: steamOpacity},
-        pointDim: {value: steamDropDim},
-
-    };
-	
-	particleMaterial = new THREE.ShaderMaterial({  
-		uniforms: uniforms,
+	particleMaterial_steam = new THREE.ShaderMaterial({  
+		uniforms: uniforms_steam,
 		vertexShader: document.getElementById('vertex_steam_particles').textContent,
 		fragmentShader: document.getElementById('fragment_particles').textContent,
 		blending: THREE.AdditiveBlending,
 		transparent: true,
 	}); 
-	var particlePoints = new THREE.Points( particleGeometry, particleMaterial );
-	ground.add(particlePoints);
+
+	var particlePoints_water = new THREE.Points( particleGeometry_water, particleMaterial_water );
+	var particlePoints_steam = new THREE.Points( particleGeometry_steam, particleMaterial_steam );
+	ground.add(particlePoints_water);
+	ground.add(particlePoints_steam);
 	
-	return particlePoints;
+	return [particlePoints_water, particlePoints_steam];
 	
 }
-
  
 //1px del raggio equivale a +0.5 n e +12.5 sigma (50 = 10 e 500)
 

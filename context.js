@@ -1,5 +1,7 @@
 var keyboard = {};
 var geyserRadius = 50;
+var cubeSize = 600;
+var groundSize = 30;
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 1, 10000);
@@ -25,8 +27,8 @@ var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
 //Sun Spot Light
-var spotLight = new THREE.SpotLight(0xffffff, 2, 1000, 0.8, 0.5, 1);
-spotLight.position.set(-450,130,130);
+var spotLight = new THREE.SpotLight(0xffffff, 2, 1500, 0.8, 0.5, 1.0);
+spotLight.position.set(-600,130,130);
 scene.add(spotLight);
 //Light Helper
 var spotLightHelper = new THREE.SpotLightHelper( spotLight );
@@ -65,11 +67,11 @@ var worldMaterials = [
 	    side: THREE.BackSide,
 		map: worldTexture[5] })
 ];  
-var worldGeometry = new THREE.BoxGeometry(600, 600, 600, 3, 3, 3);
+var worldGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize, 3, 3, 3);
 var world = new THREE.Mesh(worldGeometry, new THREE.MeshFaceMaterial(worldMaterials));
 
 //Ground Geometry
-var groundGeometry = new THREE.BoxGeometry(600, 30, 600);
+var groundGeometry = new THREE.BoxGeometry(cubeSize, groundSize, cubeSize);
 //Loading Ground Texture
 var groundTexture = new THREE.TextureLoader().load( "texture/ground.jpg" );
 var groundTextureNoRepeat = new THREE.TextureLoader().load( "texture/ground.jpg" );
@@ -97,7 +99,7 @@ var groundMaterials = [
 	})
 ];
 var ground = new THREE.Mesh(groundGeometry, new THREE.MeshFaceMaterial(groundMaterials));
-ground.position.set(0,-300,0);
+ground.position.set(0,-cubeSize/2+groundSize/2,0);
 
 //WATER!!!!!
 
@@ -119,7 +121,7 @@ water = new THREE.Water( renderer, camera, scene, {
 var geyserGeometry = new THREE.CircleGeometry(geyserRadius, 50);//parametro
 var geyser = new THREE.Mesh(geyserGeometry, water.material);
 geyser.rotation.x = -Math.PI/2;
-geyser.position.y = 15.2;
+geyser.position.y = groundSize/2 + 0.2;
 geyser.add(water);
 
 //Water Bottom
@@ -128,7 +130,7 @@ var circleMaterial = new THREE.MeshBasicMaterial({
 	color:0x3399ff
 });
 var circleBlue = new THREE.Mesh(circleBlueGeometry, circleMaterial);
-circleBlue.position.y = 15.1;
+circleBlue.position.y = groundSize/2 + 0.1;
 circleBlue.rotation.x = -Math.PI/2;
 ground.add(circleBlue);
 

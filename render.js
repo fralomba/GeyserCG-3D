@@ -5,7 +5,6 @@ $(function() {
     var steam_drops = [];
     var reset = false;
 
-
     var explosions = 0;
     var numExp = 25;
 
@@ -14,8 +13,10 @@ $(function() {
         this.Radius = 50;
         this.DropDimension = 8.0;
         this.WaterOpacity = 1.0;
+        this.Y_PowerWater = 60;
         this.SteamDimension = 8.0
         this.SteamOpacity = 1.0;
+        this.Y_PowerSteam = 20; 
     };
 
     var datGui = new dat.GUI();//associo i controlli creati sopra a un oggetto dat.GUI
@@ -56,15 +57,23 @@ $(function() {
     });
 
     waterFolder.add(guiControls, 'WaterOpacity', 0, 1).onFinishChange(function(){
-        waterOpacity = waterFolder.WaterOpacity;
+        waterOpacity = guiControls.WaterOpacity;
+    });
+    
+    waterFolder.add(guiControls, 'Y_PowerWater', 60, 90).onFinishChange(function(){
+        v0y_water = guiControls.Y_PowerWater;
     });
 
     steamFolder.add(guiControls, 'SteamDimension', 3, 20).onFinishChange(function(){
         steamDropDim = guiControls.SteamDimension;
     });
 
-    steamFolder.add(guiControls, 'SteamOpacity', 0, 1).onFinishChange(function(){
-        steamOpacity = waterFolder.SteamOpacity;
+    steamFolder.add(guiControls, 'SteamOpacity', 0, 1.0).onFinishChange(function(){
+        steamOpacity = guiControls.SteamOpacity;
+    });
+    
+    steamFolder.add(guiControls, 'Y_PowerSteam', 20, 40).onFinishChange(function(){
+        v0y_steam = guiControls.Y_PowerSteam;
     });
 
     function render() {
@@ -90,9 +99,11 @@ $(function() {
             if(!reset){
                 var n = (geyserRadius-50)*1.5 + 10;
                 var sigma = (geyserRadius-50)*12.5 + 500;
-
-                water_drops[explosions] = create_particles_water(n, sigma);
-                steam_drops[explosions] = create_particles_steam(n, sigma);
+				
+				var particles = create_particles_water(n, sigma);
+				
+                water_drops[explosions] = particles[0];
+                steam_drops[explosions] = particles[1];
                 
                 explosions++;
             }
@@ -111,7 +122,7 @@ $(function() {
 		        water_drops.splice(i, 1);
 		       
 	        } else {
-		        console.log('gpu');
+
 		    	water_drops[i].material.uniforms.t.value += 0.4;
 		    	 
 	        }
