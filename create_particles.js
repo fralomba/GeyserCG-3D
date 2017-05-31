@@ -4,22 +4,19 @@ function random_range(a,b){
 	
 }
 
-var texture_water_drop = new THREE.TextureLoader().load('texture/water_drop.png');
-var texture_steam_drop = new THREE.TextureLoader().load('texture/water_drop.png');
+var texture_water_drop = new THREE.TextureLoader().load('texture/water_drop1.png');
+var texture_steam_drop = new THREE.TextureLoader().load('texture/steam_drop.png');
 var waterDropDim = 8.0;
 var steamDropDim = 8.0;
 var waterOpacity = 1.0;
 var steamOpacity = 1.0;
 var v0y_water = 60;
 var v0y_steam = 20;
-
+var jMax_water = 70;
 
 function create_particles_water(n, sigma){
 	
-	console.log(steamOpacity);
-	
-	var jMax_water = 70;
-	var jMax_steam = 30;
+	var jMax_steam = 100 - jMax_water;
 	var A = 5;
 	var vertices_water = new Float32Array(n*jMax_water*3);
 	var movements_water = new Float32Array(n*jMax_water*3);
@@ -80,7 +77,7 @@ function create_particles_water(n, sigma){
 	            vertices_steam[i*jMax_steam*3 + j*3 + 2] = z;
 	            
 	            movements_steam[i*jMax_steam*3 + j*3] = random_range(-Math.PI,Math.PI);
-	            movements_steam[i*jMax_steam*3 + j*3 + 1] = random_range(0,6);
+	            movements_steam[i*jMax_steam*3 + j*3 + 1] = random_range(0,5);
 	            movements_steam[i*jMax_steam*3 + j*3 + 2] = random_range(1,v0y_steam);
 				
 			}
@@ -95,7 +92,10 @@ function create_particles_water(n, sigma){
 	
 	particleGeometry_steam.addAttribute('position', new THREE.BufferAttribute(vertices_steam, 3));
 	particleGeometry_steam.addAttribute('movements', new THREE.BufferAttribute(movements_steam, 3));
-
+	
+	console.log(vertices_water);
+	console.log(vertices_steam);
+	
     var uniforms_water = {
 		t: {value: 0.0},
 		texture_sampler: {type: 't', value: texture_water_drop},
@@ -136,8 +136,6 @@ function create_particles_water(n, sigma){
 	return [particlePoints_water, particlePoints_steam];
 	
 }
- 
-//1px del raggio equivale a +0.5 n e +12.5 sigma (50 = 10 e 500)
 
 
 

@@ -7,18 +7,8 @@ var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 1, 10000);
 var renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
-//renderer.setSize(600, 600);
 camera.position.z = 1500;
-
 document.body.appendChild( renderer.domElement );
-
-/*var pointLight = new THREE.PointLight(0xffffff, 0.8);
-pointLight.position.set(-50,25,25)
-scene.add(pointLight);
-var sphereSize = 50;
-var pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
-scene.add( pointLightHelper );*/
-
 
 //LIGHTS
 
@@ -31,8 +21,8 @@ var spotLight = new THREE.SpotLight(0xffffff, 2, 1500, 0.8, 0.5, 1.0);
 spotLight.position.set(-600,130,130);
 scene.add(spotLight);
 //Light Helper
-var spotLightHelper = new THREE.SpotLightHelper( spotLight );
-//scene.add( spotLightHelper );
+var spotLightHelper = new THREE.SpotLightHelper(spotLight);
+//scene.add(spotLightHelper);
 
 //Meshes
 
@@ -141,4 +131,16 @@ scene.add(world);
 document.onkeydown = function(ev){
 	keyboard[ev.keyCode] = true;
 };
+
+//TEXT
+
+var loader = new THREE.FontLoader();
+
+var textMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
+var font = loader.parse(fontJSON);
+var textGeometry = new THREE.TextGeometry('Press Space to Explode!', {font: font, size: 50, height: 5, material: 0, bevelThickness: 1, extrudeMaterial: 1});
+var textMesh = new THREE.Mesh( textGeometry, textMaterial );
+textMesh.position.set(-cubeSize/2 - 80,+cubeSize/2 + 80,0);
+
+scene.add(textMesh);
 
