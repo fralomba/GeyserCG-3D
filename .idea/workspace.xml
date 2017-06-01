@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0e5545ec-0d8c-4a74-941e-b572dd78fcb6" name="Default" comment="tolti warning">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_particles.js" afterPath="$PROJECT_DIR$/create_particles.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/render.js" afterPath="$PROJECT_DIR$/render.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +18,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
-              <caret line="76" column="39" lean-forward="false" selection-start-line="76" selection-start-column="39" selection-end-line="76" selection-end-column="39" />
+            <state relative-caret-position="204">
+              <caret line="93" column="34" lean-forward="false" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -30,29 +28,35 @@
       <file leaf-file-name="context.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/context.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1545">
-              <caret line="103" column="27" lean-forward="false" selection-start-line="103" selection-start-column="27" selection-end-line="103" selection-end-column="27" />
+            <state relative-caret-position="1425">
+              <caret line="95" column="27" lean-forward="false" selection-start-line="95" selection-start-column="27" selection-end-line="95" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="render.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="render.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/render.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="34" />
+            <state relative-caret-position="117">
+              <caret line="41" column="54" lean-forward="true" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create_particles.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="create_particles.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/create_particles.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="125" column="34" lean-forward="false" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="34" />
-              <folding />
+            <state relative-caret-position="1275">
+              <caret line="85" column="34" lean-forward="false" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
+              <folding>
+                <marker date="1496309061000" expanded="true" signature="3209:4577" ph="{...}" />
+                <marker date="1496309061000" expanded="true" signature="3239:3422" ph="{...}" />
+                <marker date="1496309061000" expanded="true" signature="3448:3646" ph="{...}" />
+                <marker date="1496309061000" expanded="true" signature="3701:3948" ph="{&quot;uniforms&quot;: uniforms_water...}" />
+                <marker date="1496309061000" expanded="true" signature="4004:4251" ph="{&quot;uniforms&quot;: uniforms_steam...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -76,9 +80,9 @@
         <option value="$PROJECT_DIR$/orbit_controls.js" />
         <option value="$PROJECT_DIR$/../../../../../PhpstormProjects/test/js/randomTests.js" />
         <option value="$PROJECT_DIR$/context.js" />
+        <option value="$PROJECT_DIR$/create_particles.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/render.js" />
-        <option value="$PROJECT_DIR$/create_particles.js" />
       </list>
     </option>
   </component>
@@ -108,7 +112,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -138,6 +141,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -165,13 +169,9 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.DS_Store</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/context.js</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/create_particles.js</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/index.html</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/render.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/texture/.DS_Store</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/texture/water_drop.png</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -376,7 +376,13 @@
       <workItem from="1495833681079" duration="591000" />
       <workItem from="1495906943695" duration="156000" />
       <workItem from="1496053168629" duration="1375000" />
-      <workItem from="1496063146683" duration="2907000" />
+      <workItem from="1496063146683" duration="3080000" />
+      <workItem from="1496075470857" duration="190000" />
+      <workItem from="1496090357123" duration="167000" />
+      <workItem from="1496094086078" duration="227000" />
+      <workItem from="1496148645951" duration="1155000" />
+      <workItem from="1496159090724" duration="721000" />
+      <workItem from="1496308677448" duration="171000" />
     </task>
     <task id="LOCAL-00001" summary="test da phpstorm">
       <created>1495444059744</created>
@@ -403,13 +409,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40620000" />
+    <option name="totallyTimeSpent" value="43424000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20028612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21745351" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -500,7 +506,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1170">
           <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1496309061000" expanded="true" signature="3209:4577" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3239:3422" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3448:3646" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3701:3948" ph="{&quot;uniforms&quot;: uniforms_water...}" />
+            <marker date="1496309061000" expanded="true" signature="4004:4251" ph="{&quot;uniforms&quot;: uniforms_steam...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -524,7 +536,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1095">
           <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1496309061000" expanded="true" signature="3209:4577" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3239:3422" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3448:3646" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3701:3948" ph="{&quot;uniforms&quot;: uniforms_water...}" />
+            <marker date="1496309061000" expanded="true" signature="4004:4251" ph="{&quot;uniforms&quot;: uniforms_steam...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -564,7 +582,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1095">
           <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1496309061000" expanded="true" signature="3209:4577" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3239:3422" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3448:3646" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3701:3948" ph="{&quot;uniforms&quot;: uniforms_water...}" />
+            <marker date="1496309061000" expanded="true" signature="4004:4251" ph="{&quot;uniforms&quot;: uniforms_steam...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -612,7 +636,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="855">
           <caret line="57" column="31" lean-forward="false" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
-          <folding />
+          <folding>
+            <marker date="1496309061000" expanded="true" signature="3209:4577" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3239:3422" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3448:3646" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3701:3948" ph="{&quot;uniforms&quot;: uniforms_water...}" />
+            <marker date="1496309061000" expanded="true" signature="4004:4251" ph="{&quot;uniforms&quot;: uniforms_steam...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -644,7 +674,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="855">
           <caret line="57" column="31" lean-forward="false" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
-          <folding />
+          <folding>
+            <marker date="1496309061000" expanded="true" signature="3209:4577" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3239:3422" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3448:3646" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3701:3948" ph="{&quot;uniforms&quot;: uniforms_water...}" />
+            <marker date="1496309061000" expanded="true" signature="4004:4251" ph="{&quot;uniforms&quot;: uniforms_steam...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -827,42 +863,47 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/context.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1545">
-          <caret line="103" column="27" lean-forward="false" selection-start-line="103" selection-start-column="27" selection-end-line="103" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="76" column="39" lean-forward="false" selection-start-line="76" selection-start-column="39" selection-end-line="76" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../../PhpstormProjects/test/js/randomTests.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
           <caret line="73" column="11" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/render.js">
+    <entry file="file://$PROJECT_DIR$/context.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="34" />
+        <state relative-caret-position="1425">
+          <caret line="95" column="27" lean-forward="false" selection-start-line="95" selection-start-column="27" selection-end-line="95" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/create_particles.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="125" column="34" lean-forward="false" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="34" />
+        <state relative-caret-position="1275">
+          <caret line="85" column="34" lean-forward="false" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
+          <folding>
+            <marker date="1496309061000" expanded="true" signature="3209:4577" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3239:3422" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3448:3646" ph="{...}" />
+            <marker date="1496309061000" expanded="true" signature="3701:3948" ph="{&quot;uniforms&quot;: uniforms_water...}" />
+            <marker date="1496309061000" expanded="true" signature="4004:4251" ph="{&quot;uniforms&quot;: uniforms_steam...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="93" column="34" lean-forward="false" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/render.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="41" column="54" lean-forward="true" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
           <folding />
         </state>
       </provider>

@@ -36,7 +36,7 @@ $(function() {
 	    keyboard[32] = false;
     });
 
-    generalFolder.add(guiControls,'Radius', 50, 100).onFinishChange(function () {
+    generalFolder.add(guiControls,'Radius', 50, 150).onFinishChange(function () {
         ground.remove(geyser);
         ground.remove(circleBlue);
         geyserRadius = Math.round(guiControls.Radius);
