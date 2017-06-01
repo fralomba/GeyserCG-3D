@@ -9,9 +9,11 @@ var texture_steam_drop = new THREE.TextureLoader().load('texture/steam_drop.png'
 var waterDropDim = 8.0;
 var steamDropDim = 8.0;
 var waterOpacity = 1.0;
-var steamOpacity = 1.0;
-var v0y_water = 60;
-var v0y_steam = 20;
+var steamOpacity = 0.5;
+//var v0y_water = 60;
+var v0y_water = 1000;
+//var v0y_steam = 20;
+var v0y_steam = 300;
 var jMax_water = 70;
 
 function create_particles_water(n, sigma){
@@ -59,9 +61,11 @@ function create_particles_water(n, sigma){
 	            vertices_water[i*jMax_water*3 + j*3 + 1] = 0;
 	            vertices_water[i*jMax_water*3 + j*3 + 2] = z;
 	            
-	            movements_water[i*jMax_water*3 + j*3] = random_range(0,7);
+	            //movements_water[i*jMax_water*3 + j*3] = random_range(0,7);
+	            movements_water[i*jMax_water*3 + j*3] = random_range(0,150);
 	            movements_water[i*jMax_water*3 + j*3 + 1] = theta;
-	            movements_water[i*jMax_water*3 + j*3 + 2] = random_range(25,v0y_water);
+	            //movements_water[i*jMax_water*3 + j*3 + 2] = random_range(25,v0y_water);
+	            movements_water[i*jMax_water*3 + j*3 + 2] = random_range(500,v0y_water);
 
 			}
 			
@@ -76,9 +80,11 @@ function create_particles_water(n, sigma){
 	            vertices_steam[i*jMax_steam*3 + j*3 + 1] = 0;
 	            vertices_steam[i*jMax_steam*3 + j*3 + 2] = z;
 	            
-	            movements_steam[i*jMax_steam*3 + j*3] = random_range(-Math.PI,Math.PI);
-	            movements_steam[i*jMax_steam*3 + j*3 + 1] = random_range(0,5);
+	            movements_steam[i*jMax_steam*3 + j*3] = random_range(-0,2*Math.PI);
+	            movements_steam[i*jMax_steam*3 + j*3 + 1] = random_range(0,150);
+	            //movements_steam[i*jMax_steam*3 + j*3 + 1] = random_range(0,80);
 	            movements_steam[i*jMax_steam*3 + j*3 + 2] = random_range(1,v0y_steam);
+	            //movements_steam[i*jMax_steam*3 + j*3 + 2] = random_range(50,v0y_steam);
 				
 			}
 			
@@ -92,9 +98,6 @@ function create_particles_water(n, sigma){
 	
 	particleGeometry_steam.addAttribute('position', new THREE.BufferAttribute(vertices_steam, 3));
 	particleGeometry_steam.addAttribute('movements', new THREE.BufferAttribute(movements_steam, 3));
-	
-	console.log(vertices_water);
-	console.log(vertices_steam);
 	
     var uniforms_water = {
 		t: {value: 0.0},

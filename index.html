@@ -35,7 +35,7 @@
 				vec3 p = position;				
 				
 				p.x += v0x*t;
-				p.y += -0.5*3.0*t*t+v0y*t;
+				p.y += -0.5*9.8*80.0*t*t+v0y*t;
 				p.z += v0z*t;
 				
 				if(p.y < -1.0 || abs(p.x) > limitXZ || abs(p.z) > limitXZ){
@@ -74,7 +74,7 @@
 				p.y += (v0y*t);
 				p.z += v0r*t*sin(omega);
 				
-				if(abs(p.x) > limitXZ || abs(p.z) > limitXZ){
+				if(abs(p.x) > limitXZ || abs(p.z) > limitXZ || p.y > 800.0){
 					p.x = -0.1;
 					p.y = -0.1;
 					p.z = -0.1;

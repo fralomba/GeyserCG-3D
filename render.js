@@ -1,25 +1,27 @@
 $(function() {
     orbitControls = new THREE.OrbitControls(camera);
-
+	
+	var begin_time = Date.now();
+	
     var water_drops = [];
     var steam_drops = [];
     var reset = false;
 
     var explosions = 0;
-    var numExp = 25;
-    var time_steam_drop = 60;
+    var numExp = 60;
+    var time_steam_drop = 2.5;
 
     var guiControls = new function () { // creo dei nuovi controlli
-        this.Explosion = 25;
+        this.Explosion = 60;
         this.Radius = 50;
         this.Water_to_Steam = 70;
         this.DropDimension = 8.0;
         this.WaterOpacity = 1.0;
-        this.Y_PowerWater = 60;
+        this.Y_PowerWater = 1000;
         this.SteamDimension = 8.0
-        this.SteamOpacity = 1.0;
-        this.Y_PowerSteam = 20; 
-        this.Time_Steam = 60;
+        this.SteamOpacity = 0.5;
+        this.Y_PowerSteam = 300; 
+        this.Time_Steam = 2.5;
     };
 
     var datGui = new dat.GUI({width: 350});//associo i controlli creati sopra a un oggetto dat.GUI
@@ -34,7 +36,7 @@ $(function() {
 	    keyboard[32] = false;
     });
 
-    generalFolder.add(guiControls,'Radius', 50, 200).onFinishChange(function () {
+    generalFolder.add(guiControls,'Radius', 50, 100).onFinishChange(function () {
         ground.remove(geyser);
         ground.remove(circleBlue);
         geyserRadius = Math.round(guiControls.Radius);
@@ -67,7 +69,7 @@ $(function() {
         waterOpacity = guiControls.WaterOpacity;
     });
     
-    waterFolder.add(guiControls, 'Y_PowerWater', 60, 90).onFinishChange(function(){
+    waterFolder.add(guiControls, 'Y_PowerWater', 700, 1500).onFinishChange(function(){
         v0y_water = guiControls.Y_PowerWater;
     });
 
@@ -79,16 +81,16 @@ $(function() {
         steamOpacity = guiControls.SteamOpacity;
     });
     
-    steamFolder.add(guiControls, 'Y_PowerSteam', 20, 40).onFinishChange(function(){
+    steamFolder.add(guiControls, 'Y_PowerSteam', 200, 500).onFinishChange(function(){
         v0y_steam = guiControls.Y_PowerSteam;
     });
     
-    steamFolder.add(guiControls, 'Time_Steam', 40, 100).onFinishChange(function(){
+    steamFolder.add(guiControls, 'Time_Steam', 1, 5).onFinishChange(function(){
         time_steam_drop = guiControls.Time_Steam;
     });
 
-    function render() {
-
+    function render() { 
+		
         renderer.render(scene, camera);
         requestAnimationFrame(render);
         water.material.uniforms.time.value += 1.0 / 60.0;
@@ -126,15 +128,16 @@ $(function() {
         
         for(var i=0; i<water_drops.length; i++){
 	        
-	        if(water_drops[i].material.uniforms.t.value > 50){
+	        if(water_drops[i].material.uniforms.t.value > 3){
 		        
 		        ground.remove(water_drops[i]);
 		        
 		        water_drops.splice(i, 1);
 		       
 	        } else {
-
-		    	water_drops[i].material.uniforms.t.value += 0.4;
+		        
+				//water_drops[i].material.uniforms.t.value += 0.4;
+		    	water_drops[i].material.uniforms.t.value += 1.0/60.0;
 		    	 
 	        }
             
@@ -149,7 +152,8 @@ $(function() {
 		        
 	        }else{
 		        
-		        steam_drops[i].material.uniforms.t.value += 0.4;    
+		        //steam_drops[i].material.uniforms.t.value += 0.4;    
+		        steam_drops[i].material.uniforms.t.value += 1.0/60.0;    
 		        
 	        }
         }
