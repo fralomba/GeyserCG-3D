@@ -20,7 +20,6 @@
 			uniform float t;
 			uniform float pointDim;
 			uniform float limitXZ;
-			uniform sampler2D texture_sampler;
 	
 			void main()
 			{	
@@ -59,7 +58,6 @@
 			uniform float pointDim;
 			uniform float t;
 			uniform float limitXZ;
-			uniform sampler2D texture_sampler;
 	
 			void main()
 			{	
@@ -74,7 +72,7 @@
 				p.y += (v0y*t);
 				p.z += v0r*t*sin(omega);
 				
-				if(abs(p.x) > limitXZ || abs(p.z) > limitXZ || p.y > 800.0){
+				if(abs(p.x) > limitXZ || abs(p.z) > limitXZ || p.y > 1200.0){
 					p.x = -0.1;
 					p.y = -0.1;
 					p.z = -0.1;
@@ -96,11 +94,14 @@
 			
 			void main()
 			{	
-				gl_FragColor = texture2D(texture_sampler, gl_PointCoord);
 				
-				if(gl_FragColor.a > 0.3){
-					gl_FragColor.a = opacity;
-				} 
+				if(opacity == 0.0){
+					discard;		
+				} else {
+					gl_FragColor = texture2D(texture_sampler, gl_PointCoord);
+					gl_FragColor.a = opacity;	
+				}
+				
 			}		
 			
 		</script>

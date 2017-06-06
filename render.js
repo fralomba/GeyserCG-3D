@@ -10,8 +10,9 @@ $(function() {
     var explosions = 0;
     var numExp = 60;
     var time_steam_drop = 2.5;
-
-    var guiControls = new function () { // creo dei nuovi controlli
+	
+	//Create new physics controls with default value
+    var guiControls = new function () { 
         this.Explosion = 60;
         this.Radius = 50;
         this.Water_to_Steam = 70;
@@ -24,7 +25,7 @@ $(function() {
         this.Time_Steam = 2.5;
     };
 
-    var datGui = new dat.GUI({width: 350});//associo i controlli creati sopra a un oggetto dat.GUI
+    var datGui = new dat.GUI({width: 350});
 
     var generalFolder = datGui.addFolder('Generals');
     var waterFolder = datGui.addFolder('Waterdrops');
@@ -88,7 +89,9 @@ $(function() {
     steamFolder.add(guiControls, 'Time_Steam', 1, 5).onFinishChange(function(){
         time_steam_drop = guiControls.Time_Steam;
     });
-
+	
+	
+	//Render function
     function render() { 
 		
         renderer.render(scene, camera);
@@ -99,7 +102,8 @@ $(function() {
         if(keyboard[32]){
 
             if(explosions >= numExp){
-
+				
+				//If exist, remove all the remaining particles in the scene
                 for(var i=0; i<water_drops.length; i++){
                     ground.remove(water_drops[i]);
                 }
@@ -108,26 +112,27 @@ $(function() {
                 }
                 explosions = 0;
             }
-
-            if(!reset){
-                var n = (geyserRadius-50)*1.5 + 10;
-                var sigma = (geyserRadius-50)*12.5 + 500;
+			
+			var n = (geyserRadius-50)*1.5 + 10;
+			var sigma = (geyserRadius-50)*12.5 + 500;
+			
+			//Creating the particles for each explosion
+			var particles = create_particles_water(n, sigma);
 				
-				var particles = create_particles_water(n, sigma);
-				
-                water_drops[explosions] = particles[0];
-                steam_drops[explosions] = particles[1];
+			water_drops[explosions] = particles[0];
+			steam_drops[explosions] = particles[1];
                 
-                explosions++;
-            }
+			explosions++;
 
             if(explosions >= numExp){
                 keyboard[32] = false;
             }
         }
         
+        
         for(var i=0; i<water_drops.length; i++){
 	        
+	        //Remove the water particles after 3 seconds
 	        if(water_drops[i].material.uniforms.t.value > 3){
 		        
 		        ground.remove(water_drops[i]);
@@ -136,7 +141,7 @@ $(function() {
 		       
 	        } else {
 		        
-				//water_drops[i].material.uniforms.t.value += 0.4;
+				//Update uniform time value for each buffer created (water)
 		    	water_drops[i].material.uniforms.t.value += 1.0/60.0;
 		    	 
 	        }
@@ -145,6 +150,7 @@ $(function() {
         
         for(var i=0; i<steam_drops.length; i++){
 	        
+	        //Remove the water particles after time_steam_drop seconds
 	        if(steam_drops[i].material.uniforms.t.value > time_steam_drop){
 		        
 		        ground.remove(steam_drops[i]);
@@ -152,7 +158,7 @@ $(function() {
 		        
 	        }else{
 		        
-		        //steam_drops[i].material.uniforms.t.value += 0.4;    
+				//Update uniform time value for each buffer created (steam)    
 		        steam_drops[i].material.uniforms.t.value += 1.0/60.0;    
 		        
 	        }

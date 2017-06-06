@@ -35,7 +35,7 @@ var worldTexture = [
 	new THREE.TextureLoader().load( 'texture/cube_map/skybox/pz.jpg' ),
 	new THREE.TextureLoader().load( 'texture/cube_map/skybox/px.jpg' )
 ];
-//Define Materials for each Face
+//Define Materials for each face
 var worldMaterials = [
     new THREE.MeshBasicMaterial({
 	    side: THREE.BackSide,
@@ -56,7 +56,8 @@ var worldMaterials = [
     new THREE.MeshBasicMaterial( {
 	    side: THREE.BackSide,
 		map: worldTexture[5] })
-];  
+]; 
+//Define a cube geometry  
 var worldGeometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize, 3, 3, 3);
 var world = new THREE.Mesh(worldGeometry, new THREE.MeshFaceMaterial(worldMaterials));
 
@@ -91,8 +92,7 @@ var groundMaterials = [
 var ground = new THREE.Mesh(groundGeometry, new THREE.MeshFaceMaterial(groundMaterials));
 ground.position.set(0,-cubeSize/2+groundSize/2,0);
 
-//WATER!!!!!
-
+//Adding water shader
 waterNormals = new THREE.TextureLoader().load( 'texture/water/water_normals.jpg' );
 waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
 
@@ -122,18 +122,9 @@ var circleMaterial = new THREE.MeshBasicMaterial({
 var circleBlue = new THREE.Mesh(circleBlueGeometry, circleMaterial);
 circleBlue.position.y = groundSize/2 + 0.1;
 circleBlue.rotation.x = -Math.PI/2;
-ground.add(circleBlue);
 
-ground.add(geyser);
-scene.add(ground);
-scene.add(world);
 
-document.onkeydown = function(ev){
-	keyboard[ev.keyCode] = true;
-};
-
-//TEXT
-
+//Adding text above the cube
 var loader = new THREE.FontLoader();
 
 var textMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
@@ -142,5 +133,12 @@ var textGeometry = new THREE.TextGeometry('Press Space to Explode!', {font: font
 var textMesh = new THREE.Mesh( textGeometry, textMaterial );
 textMesh.position.set(-cubeSize/2 - 80,+cubeSize/2 + 80,0);
 
+ground.add(geyser);
+ground.add(circleBlue);
+scene.add(ground);
+scene.add(world);
 scene.add(textMesh);
 
+document.onkeydown = function(ev){
+	keyboard[ev.keyCode] = true;
+};

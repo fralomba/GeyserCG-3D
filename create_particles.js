@@ -1,25 +1,29 @@
+
+//Random value between range 
 function random_range(a,b){
 	
 	return (b-a)*Math.random() + a;
 	
 }
 
+//Loading texture particles
 var texture_water_drop = new THREE.TextureLoader().load('texture/water_drop1.png');
 var texture_steam_drop = new THREE.TextureLoader().load('texture/steam_drop.png');
+//Default particles value
 var waterDropDim = 8.0;
 var steamDropDim = 8.0;
 var waterOpacity = 1.0;
 var steamOpacity = 0.5;
-//var v0y_water = 60;
 var v0y_water = 1000;
-//var v0y_steam = 20;
 var v0y_steam = 300;
 var jMax_water = 70;
 
+//Create the particles
 function create_particles_water(n, sigma){
 	
 	var jMax_steam = 100 - jMax_water;
 	var A = 5;
+	//Inizializing the buffers
 	var vertices_water = new Float32Array(n*jMax_water*3);
 	var movements_water = new Float32Array(n*jMax_water*3);
 	var vertices_steam = new Float32Array(n*jMax_steam*3);
@@ -61,10 +65,8 @@ function create_particles_water(n, sigma){
 	            vertices_water[i*jMax_water*3 + j*3 + 1] = 0;
 	            vertices_water[i*jMax_water*3 + j*3 + 2] = z;
 	            
-	            //movements_water[i*jMax_water*3 + j*3] = random_range(0,7);
 	            movements_water[i*jMax_water*3 + j*3] = random_range(0,150);
 	            movements_water[i*jMax_water*3 + j*3 + 1] = theta;
-	            //movements_water[i*jMax_water*3 + j*3 + 2] = random_range(25,v0y_water);
 	            movements_water[i*jMax_water*3 + j*3 + 2] = random_range(500,v0y_water);
 
 			}
@@ -80,25 +82,22 @@ function create_particles_water(n, sigma){
 	            vertices_steam[i*jMax_steam*3 + j*3 + 1] = 0;
 	            vertices_steam[i*jMax_steam*3 + j*3 + 2] = z;
 	            
-	            movements_steam[i*jMax_steam*3 + j*3] = random_range(-0,2*Math.PI);
+	            movements_steam[i*jMax_steam*3 + j*3] = random_range(0,2*Math.PI);
 	            movements_steam[i*jMax_steam*3 + j*3 + 1] = random_range(0,150);
-	            //movements_steam[i*jMax_steam*3 + j*3 + 1] = random_range(0,80);
 	            movements_steam[i*jMax_steam*3 + j*3 + 2] = random_range(1,v0y_steam);
-	            //movements_steam[i*jMax_steam*3 + j*3 + 2] = random_range(50,v0y_steam);
 				
 			}
-			
-		
 		}
-			
 	}
 	
+	//Binding buffers to the shaders
 	particleGeometry_water.addAttribute('position', new THREE.BufferAttribute(vertices_water, 3));
 	particleGeometry_water.addAttribute('movements', new THREE.BufferAttribute(movements_water, 3));
 	
 	particleGeometry_steam.addAttribute('position', new THREE.BufferAttribute(vertices_steam, 3));
 	particleGeometry_steam.addAttribute('movements', new THREE.BufferAttribute(movements_steam, 3));
 	
+	//Inizializing uniforms variable for each type of particles
     var uniforms_water = {
 		t: {value: 0.0},
 		texture_sampler: {type: 't', value: texture_water_drop},
@@ -115,6 +114,7 @@ function create_particles_water(n, sigma){
         limitXZ: {value: cubeSize/2},
     };
 	
+	//Inizializing custom shaders
 	particleMaterial_water = new THREE.ShaderMaterial({  
 		uniforms: uniforms_water,
 		vertexShader: document.getElementById('vertex_water_particles').textContent,
@@ -130,7 +130,8 @@ function create_particles_water(n, sigma){
 		blending: THREE.AdditiveBlending,
 		transparent: true,
 	}); 
-
+	
+	//Adding particles to the scene
 	var particlePoints_water = new THREE.Points( particleGeometry_water, particleMaterial_water );
 	var particlePoints_steam = new THREE.Points( particleGeometry_steam, particleMaterial_steam );
 	ground.add(particlePoints_water);
