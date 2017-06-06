@@ -129,7 +129,7 @@ var loader = new THREE.FontLoader();
 
 var textMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
 var font = loader.parse(fontJSON);
-var textGeometry = new THREE.TextGeometry('Press Space to Explodeyjgjghjg!', {font: font, size: 50, height: 5, material: 0, bevelThickness: 1, extrudeMaterial: 1});
+var textGeometry = new THREE.TextGeometry('Press Space to Explode!', {font: font, size: 50, height: 5, material: 0, bevelThickness: 1, extrudeMaterial: 1});
 var textMesh = new THREE.Mesh( textGeometry, textMaterial );
 textMesh.position.set(-cubeSize/2 - 80,+cubeSize/2 + 80,0);
 
