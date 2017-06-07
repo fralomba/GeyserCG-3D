@@ -70,10 +70,10 @@
 \begin{frame}{Introduction}
 	\begin{block}{Project Aim}
 		\begin{itemize}
-			\item Simulation the \textbf{physics} of water and steam particles
-			\item Description the motion of water particles following a \textbf{parabolic trajectory}
-			\item Description the \textbf{randomic} motion of steam particles in 3D space
-			\item Creation a pseudo-realistic scene
+			\item Simulation of the \textbf{physics} of water and steam particles
+			\item Description of the motion of water particles following a \textbf{parabolic trajectory}
+			\item Description of the \textbf{randomic} motion of steam particles in 3D space
+			\item Creation of a pseudo-realistic scene
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -149,7 +149,7 @@
 		\item random value \textbf{v0y} for the initial speed along the y-axis
 		\item random value \textbf{v0r} for the initial speed along the xz-plane
 		\item the \textbf{radial direction} for each water particle in the xz-plane, given by the angle $\theta$ seen before
-		\item the direction for each steam particle in the xz-plane, given by a random value\textbf{ between $\omega = [0, 2\pi]$}
+		\item the direction for each steam particle in the xz-plane, given by a random value\textbf{ between $\omega \in [0, 2\pi]$}
 	\end{itemize} 
 \end{itemize}
 
@@ -268,7 +268,7 @@
 		When the space button is pressed, the render function distributes particles in the scene:
 		\begin{itemize}
 			\item particles movement is simulated by\textbf{ upgrading the uniform variable t} in every frame and computing the new position for each point
-			\item \textbf{ new particles are created} frame by frame (so with t inizialized to 0) and they are 'exploded'
+			\item \textbf{new particles are created} frame by frame (so with t inizialized to 0) and they are 'exploded'
 			\item the process is \textbf{repeated} until a threshold value is reached
 		\end{itemize}
 	\end{block}
@@ -278,7 +278,7 @@
 \begin{frame}{Physics }
 
 \begin{block}{Physics Controls}
-	Some controls have been implemented in order to let the users able to customize their experience:
+	Some controls have been implemented in order to let the users be able to customize their experience:
 
 	\fbox{\includegraphics[width=.42\textwidth,height=5.0cm]{controls}}
 	\centering
