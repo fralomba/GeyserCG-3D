@@ -33,10 +33,12 @@ function create_particles_water(n, sigma){
 	var x;
 	var z;
 	
+	console.log(vertices_water.length);
+	
 	var particleGeometry_water = new THREE.BufferGeometry();
 	var particleGeometry_steam = new THREE.BufferGeometry();
 	
-	for(var i=0; i<=n; i++){
+	for(var i=0; i<n; i++){
 		
 		var z = (A/n)*(n-i);
 		

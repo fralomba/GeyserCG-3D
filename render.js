@@ -60,6 +60,7 @@ $(function() {
     
     generalFolder.add(guiControls, 'Water_to_Steam', 50, 100).onFinishChange(function(){
 	    jMax_water = Math.round(guiControls.Water_to_Steam);
+	    console.log(jMax_water);
     });
 
     waterFolder.add(guiControls, 'DropDimension', 3, 20).onFinishChange(function(){
@@ -113,7 +114,7 @@ $(function() {
                 explosions = 0;
             }
 			
-			var n = (geyserRadius-50)*1.5 + 10;
+			var n = Math.round((geyserRadius-50)*1.5) + 10;
 			var sigma = (geyserRadius-50)*12.5 + 500;
 			
 			//Creating the particles for each explosion
