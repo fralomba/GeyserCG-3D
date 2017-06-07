@@ -60,7 +60,6 @@ $(function() {
     
     generalFolder.add(guiControls, 'Water_to_Steam', 50, 100).onFinishChange(function(){
 	    jMax_water = Math.round(guiControls.Water_to_Steam);
-	    console.log(jMax_water);
     });
 
     waterFolder.add(guiControls, 'DropDimension', 3, 20).onFinishChange(function(){
