@@ -134,6 +134,8 @@ function create_particles_water(n, sigma){
 	//Adding particles to the scene
 	var particlePoints_water = new THREE.Points( particleGeometry_water, particleMaterial_water );
 	var particlePoints_steam = new THREE.Points( particleGeometry_steam, particleMaterial_steam );
+	particlePoints_steam.sortParticles = true;
+	particlePoints_water.sortParticles = true;
 	ground.add(particlePoints_water);
 	ground.add(particlePoints_steam);
 	
