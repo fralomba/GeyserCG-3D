@@ -121,6 +121,7 @@ function create_particles_water(n, sigma){
 		fragmentShader: document.getElementById('fragment_particles').textContent,
 		blending: THREE.AdditiveBlending,
 		transparent: true,
+		alphaTest: 0.5
 	});
 	
 	particleMaterial_steam = new THREE.ShaderMaterial({  
@@ -129,6 +130,7 @@ function create_particles_water(n, sigma){
 		fragmentShader: document.getElementById('fragment_particles').textContent,
 		blending: THREE.AdditiveBlending,
 		transparent: true,
+		alphaTest: 0.5
 	}); 
 	
 	//Adding particles to the scene
