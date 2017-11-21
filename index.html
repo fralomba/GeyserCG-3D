@@ -99,7 +99,7 @@
 					discard;		
 				} else {
 					gl_FragColor = texture2D(texture_sampler, gl_PointCoord);
-					if(gl_fragColor.a < 0.5){
+					if(gl_FragColor.a < 0.5){
 						discard;
 					}
 					gl_FragColor.a = opacity;	
